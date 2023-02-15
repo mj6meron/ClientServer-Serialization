@@ -6,7 +6,7 @@ import java.util.Calendar;
 
 public class InflateTime {
     public static void main(String [] args){
-        String filename = "time.ser";
+        String filename = "details.ser";
         if(args.length > 0) {
             filename = args[0];
         }
@@ -24,9 +24,8 @@ public class InflateTime {
             ex.printStackTrace();
         }
 // print out restored time
-        System.out.println("Flattened time: " + time.getTime());
+        assert time != null;
+        System.out.println("Details: " + time.getDetails());
         System.out.println();
-        // print out the current time
-        System.out.println("Currenttime:"+Calendar.getInstance().getTime());
     }
 }

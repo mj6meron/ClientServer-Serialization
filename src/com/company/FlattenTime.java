@@ -6,11 +6,11 @@ import java.io.IOException;
 
 public class FlattenTime {
     public static void main(String [] args){
-        String filename = "time.ser";
+        String filename = "details.ser";
         if(args.length > 0){
             filename = args[0];
         }
-        PersistentTime time = new PersistentTime();
+        PersistentTime time = new PersistentTime("Meron", "Stockholm", 27);
         FileOutputStream fos = null;
         ObjectOutputStream out = null;
         try {
