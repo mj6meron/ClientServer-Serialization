@@ -2,11 +2,11 @@ package com.company;
 import java.io.Serializable;
 import java.util.Date;
 
-public class PersistentTime implements Serializable {
+public class Peron implements Serializable {
     private final String name;
     private final String address;
     private final int age;
-    public PersistentTime(String name, String address, int age) {
+    public Peron(String name, String address, int age) {
 
         this.name = name;
         this.address = address;

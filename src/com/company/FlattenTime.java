@@ -10,7 +10,7 @@ public class FlattenTime {
         if(args.length > 0){
             filename = args[0];
         }
-        PersistentTime time = new PersistentTime("Meron", "Stockholm", 27);
+        Peron time = new Peron("Meron", "Stockholm", 27);
         FileOutputStream fos = null;
         ObjectOutputStream out = null;
         try {

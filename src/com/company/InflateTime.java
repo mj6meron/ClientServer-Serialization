@@ -2,7 +2,6 @@ package com.company;
 import java.io.ObjectInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Calendar;
 
 public class InflateTime {
     public static void main(String [] args){
@@ -10,13 +9,13 @@ public class InflateTime {
         if(args.length > 0) {
             filename = args[0];
         }
-        PersistentTime time = null;
+        Peron time = null;
         FileInputStream fis = null;
         ObjectInputStream in = null;
         try {
             fis = new FileInputStream(filename);
             in = new ObjectInputStream(fis);
-            time = (PersistentTime)in.readObject();
+            time = (Peron)in.readObject();
             in.close();
         } catch(IOException ex){
             ex.printStackTrace();
