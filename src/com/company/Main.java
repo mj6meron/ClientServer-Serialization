@@ -1,5 +1,6 @@
 package com.company;
 
+import javax.swing.*;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -34,17 +35,21 @@ public class Main {
                     break;
                 } else if (command.contains("random")) {
                     out.println(generateRandomName());
-                } else {
-                    out.println(command);
                 }
+                out.println(command);
 
-                // Read the server's response
+                // print out whatever the server says!
                 String serverMessage = in.readLine();
+                //JOptionPane.showMessageDialog(null, serverMessage);
                 System.out.println("Server echo: " + serverMessage);
+
             }
+
+
 
             socket.close();
             System.exit(0);
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -58,4 +63,5 @@ public class Main {
         int adjIndex = (int) (Math.random() * adjectives.length);
         return names[nameIndex] + " is a " + adjectives[adjIndex] + " person.";
     }
+
 }
