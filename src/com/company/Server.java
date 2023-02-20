@@ -1,26 +1,50 @@
 package com.company;
 
-import java.io.*;
-import java.net.*;
-import java.util.ArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 public class Server {
-    private static final int PORT = 1234;
+    private final Integer PORT = 1234;
 
-    private static ArrayList<ClientHandler> clients = new ArrayList<>();
-    private static ExecutorService pool = Executors.newFixedThreadPool(10);
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-        ServerSocket serverSocket = new ServerSocket(PORT);
-        System.out.println("Server started on port " + PORT);
+    public static void main(String[] args) {
+        new Server().runServer();
+    }
 
-        while (true) {
-            Socket client = serverSocket.accept();
-            System.out.println("Client connected from " + client.getRemoteSocketAddress().toString());
-            ClientHandler clientHandler = new ClientHandler(client);
-            clients.add(clientHandler);
-            pool.submit(clientHandler);
+    private void runServer() {
+        ServerSocket serverSocket = null;
+        try {
+            serverSocket = new ServerSocket(PORT);
+            System.out.println("Server started on port " + PORT);
+        } catch (IOException e) {
+            System.err.println("Could not listen on port: " + PORT);
+            System.exit(-1);
+        }
+
+        try {
+            while (true) {
+                Socket clientSocket = serverSocket.accept();
+                System.out.println("Connection accepted to: " + clientSocket.getInetAddress());
+                new Thread(() -> { // multi - connection server
+                    try {
+                        ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
+                        Object inputObj;
+                        while ((inputObj = in.readObject()) != null) {
+                            Person person = (Person) inputObj;
+                            System.out.println("Received person object: " + person.getDetails());
+                        }
+                        in.close();
+                        clientSocket.close();
+                    } catch (IOException | ClassNotFoundException e) {
+                        e.printStackTrace();
+                        System.err.println("Failed in reading, writing");
+                        System.exit(-1);
+                    }
+                }).start();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
