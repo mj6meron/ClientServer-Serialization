@@ -9,13 +9,13 @@ public class InflateTime {
         if(args.length > 0) {
             filename = args[0];
         }
-        Peron time = null;
+        Person time = null;
         FileInputStream fis = null;
         ObjectInputStream in = null;
         try {
             fis = new FileInputStream(filename);
             in = new ObjectInputStream(fis);
-            time = (Peron)in.readObject();
+            time = (Person)in.readObject();
             in.close();
         } catch(IOException ex){
             ex.printStackTrace();

@@ -11,7 +11,7 @@ public class Server {
 
     private static ArrayList<ClientHandler> clients = new ArrayList<>();
     private static ExecutorService pool = Executors.newFixedThreadPool(10);
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         ServerSocket serverSocket = new ServerSocket(PORT);
         System.out.println("Server started on port " + PORT);
 
@@ -21,7 +21,6 @@ public class Server {
             ClientHandler clientHandler = new ClientHandler(client);
             clients.add(clientHandler);
             pool.submit(clientHandler);
-
         }
     }
 }

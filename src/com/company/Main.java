@@ -35,6 +35,10 @@ public class Main {
                     break;
                 } else if (command.contains("random")) {
                     out.println(generateRandomName());
+                }else if (command.contains("person")) {
+                    Person person = generateRandomPerson();
+                    out.println(person);
+
                 }
                 out.println(command);
 
@@ -63,5 +67,15 @@ public class Main {
         int adjIndex = (int) (Math.random() * adjectives.length);
         return names[nameIndex] + " is a " + adjectives[adjIndex] + " person.";
     }
+
+    public static Person generateRandomPerson() {
+        String[] names = {"Alex", "John", "Jane", "Jim", "Sarah", "Emma", "Michael", "Emilie", "Olivia", "William"};
+        String[] addresses = {"Stockholm", "London", "New York", "Sydney", "Paris", "Berlin", "Tokyo", "Moscow", "Toronto", "Dubai"};
+        int nameIndex = (int) (Math.random() * names.length);
+        int addrIndex = (int) (Math.random() * addresses.length);
+        int age = (int) (Math.random() * 100);
+        return new Person(names[nameIndex], addresses[addrIndex], age);
+    }
+
 
 }
