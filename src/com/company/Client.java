@@ -11,16 +11,20 @@ import java.util.Scanner;
 
 public class Client {
     public static void main(String[] args) throws IOException {
+        int PORT = 1234;
+        Socket socket = null;
         InetAddress HOST = null;
-        final int serverPort = 1234;
         ObjectOutputStream out = null;
         try {
+
+            HOST = InetAddress.getLocalHost();
+            // This is where we specify the IP address of the device where the server is running!
             String c = "192.168.0.102";
 
             // Connect to server
-            Socket socket = new Socket(InetAddress.getByName(c), serverPort);
-            assert false;
-            System.out.println("Connected to " + HOST.getHostName() + ":" + serverPort);
+            socket = new Socket(InetAddress.getByName(c), PORT);
+            System.out.println("Connected to " + HOST.getHostName() + ":" + PORT);
+            out = new ObjectOutputStream(socket.getOutputStream());
         } catch (UnknownHostException e) {
             System.err.println("Don't know about host.");
             System.exit(1);
