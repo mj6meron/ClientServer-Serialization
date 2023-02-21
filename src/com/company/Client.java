@@ -15,8 +15,11 @@ public class Client {
         Socket socket = null;
         ObjectOutputStream out = null;
         try {
-            socket = new Socket(InetAddress.getLocalHost(), PORT);
-            out = new ObjectOutputStream(socket.getOutputStream());
+            String c = "192.168.0.102";
+
+            // Connect to server
+            Socket socket = new Socket(InetAddress.getByName(c), serverPort);
+            System.out.println("Connected to " + HOST.getHostName() + ":" + serverPort);
         } catch (UnknownHostException e) {
             System.err.println("Don't know about host.");
             System.exit(1);
