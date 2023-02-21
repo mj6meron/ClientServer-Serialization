@@ -11,14 +11,15 @@ import java.util.Scanner;
 
 public class Client {
     public static void main(String[] args) throws IOException {
-        int PORT = 1234;
-        Socket socket = null;
+        InetAddress HOST = null;
+        final int serverPort = 1234;
         ObjectOutputStream out = null;
         try {
             String c = "192.168.0.102";
 
             // Connect to server
             Socket socket = new Socket(InetAddress.getByName(c), serverPort);
+            assert false;
             System.out.println("Connected to " + HOST.getHostName() + ":" + serverPort);
         } catch (UnknownHostException e) {
             System.err.println("Don't know about host.");
